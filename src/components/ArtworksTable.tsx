@@ -1,5 +1,4 @@
 import { DataTable } from 'primereact/datatable';
-import type { DataTableSelectionChangeEvent } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useState, useRef, useEffect } from 'react';
 import TitleHeader from './TitleHeader';
@@ -37,22 +36,16 @@ const ArtworksTable: React.FC<ArtworksTableProps> = ({
   rows
 }) => {
 
-  const op = useRef<any>(null);
   const [selectedArtworks, setSelectedArtworks] = useState<Artwork[]>([]);
   const rowsCountRef = useRef<number>(0);
 
   const rowsToSelect = (num: number) => {
-    console.log("num = ", num);
     const selectedRows = artworks.data.slice(0, num);
-    console.log("selectedRows = ", selectedRows);
-
     setSelectedArtworks(prev => [...prev, ...selectedRows]);
-
     rowsCountRef.current = rowsCountRef.current - selectedRows.length;
   };
 
   useEffect(() => {
-    console.log("Page Changed");
     if (rowsCountRef.current > 0) {
       rowsToSelect(rowsCountRef.current);
     }
@@ -69,8 +62,9 @@ const ArtworksTable: React.FC<ArtworksTableProps> = ({
         loading={loading}
         totalRecords={totalPages}
         lazy
+        selectionMode="multiple"
         selection={selectedArtworks}
-        onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedArtworks(e.value as Artwork[])}
+        onSelectionChange={(e: any) => setSelectedArtworks(e.value as Artwork[])}
         dataKey="id"
         tableStyle={{ minWidth: '50rem' }}
       >
@@ -79,8 +73,6 @@ const ArtworksTable: React.FC<ArtworksTableProps> = ({
           field="title"
           header={
             <TitleHeader
-              setSelectedArtworks={setSelectedArtworks}
-              artworks={artworks}
               rowsCountRef={rowsCountRef}
               rowsToSelect={rowsToSelect}
             />

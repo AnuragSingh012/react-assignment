@@ -1,4 +1,3 @@
-import React from 'react'
 import ArtworksPage from './pages/ArtworksPage'
 
 const App = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ArtworksTable from '../components/ArtworksTable';
 import type { DataTablePageEvent } from 'primereact/datatable';
 

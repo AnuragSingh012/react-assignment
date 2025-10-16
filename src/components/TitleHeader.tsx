@@ -18,7 +18,6 @@ const TitleHeader: React.FC<TitleHeaderProps> = ({ rowsCountRef, rowsToSelect })
     const input = form.selectedRows as HTMLInputElement;
 
     rowsCountRef.current = parseInt(input.value);
-    console.log(rowsCountRef);
 
     op.current?.hide();
     rowsToSelect(rowsCountRef.current);
